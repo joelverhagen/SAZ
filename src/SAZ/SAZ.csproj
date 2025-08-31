@@ -7,6 +7,25 @@
 		<LangVersion>latest</LangVersion>
 		<RootNamespace>Knapcode.SAZ</RootNamespace>
 		<AssemblyName>Knapcode.SAZ</AssemblyName>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\..\SAZ.snk</AssemblyOriginatorKeyFile>
+
+		<PackageId>Knapcode.SAZ</PackageId>
+		<Authors>Joel Verhagen</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageProjectUrl>https://github.com/joelverhagen/SAZ</PackageProjectUrl>
+    	<PackageReadmeFile>README.md</PackageReadmeFile>
+    	<Description>Process Symbol Archive Zip (SAZ) file format produced by Fiddler.</Description>
+    	<PackageTags>saz session archive zip http format fiddler</PackageTags>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
 
 </Project>
