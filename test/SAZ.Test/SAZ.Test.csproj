@@ -1,12 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<RootNamespace>Knapcode.SAZ</RootNamespace>
 		<AssemblyName>Knapcode.SAZ.Test</AssemblyName>
+		<SuppressTfmSupportBuildErrors>true</SuppressTfmSupportBuildErrors>
+		<HasVerify Condition="'$(TargetFramework)' != 'net8.0'">true</HasVerify>
+		<DefineConstants Condition="'$(HasVerify)' == 'true'">$(DefineConstants);VERIFY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,6 +19,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(HasVerify)' == 'true'">
 		<PackageReference Include="Verify.Http" />
 		<PackageReference Include="Verify.Xunit" />
 	</ItemGroup>

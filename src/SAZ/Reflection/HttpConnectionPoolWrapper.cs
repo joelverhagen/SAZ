@@ -15,7 +15,7 @@ public class HttpConnectionPoolWrapper
     {
         Inner = MajorVersion switch
         {
-            >= 6 and <= 9 => Activator.CreateInstance(Type, [manager.Inner, kind.Inner, host, port, null, null])!,
+            >= 8 and <= 9 => Activator.CreateInstance(Type, [manager.Inner, kind.Inner, host, port, null, null])!,
             _ => Activator.CreateInstance(Type, [manager.Inner, kind.Inner, host, port, null, null, null])!,
         };
     }

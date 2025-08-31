@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using EmptyFiles;
 
 namespace Knapcode.SAZ;
 
@@ -8,8 +7,10 @@ public static class ModuleInitializer
     [ModuleInitializer]
     public static void Initialize()
     {
+#if VERIFY
         VerifierSettings.InitializePlugins();
         VerifierSettings.AutoVerify(includeBuildServer: false);
-        FileExtensions.AddTextExtension("x-www-form-urlencoded");
+        EmptyFiles.FileExtensions.AddTextExtension("x-www-form-urlencoded");
+#endif
     }
 }

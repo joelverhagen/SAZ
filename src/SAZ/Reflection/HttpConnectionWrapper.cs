@@ -14,9 +14,6 @@ public class HttpConnectionWrapper
     private static readonly MethodInfo? ParseHeadersMethod;
     private static readonly MethodInfo? FillForHeadersAsyncMethod;
     private static readonly FieldInfo? ReadBufferField;
-    private static readonly MethodInfo? ParseHeaderNameValueMethod;
-    private static readonly MethodInfo? IsLineEmptyMethod;
-    private static readonly MethodInfo? ReadNextResponseHeaderLineAsyncMethod;
     private static readonly Type ChunkedEncodingReadStreamType;
     private static readonly Type ContentLengthReadStreamType;
     private static readonly Type ConnectionCloseReadStreamType;
@@ -28,20 +25,10 @@ public class HttpConnectionWrapper
         AllowedReadLineBytesField = ReflectionHelper.GetInstanceField(Type, "_allowedReadLineBytes");
         ThrowExceededAllowedReadLineBytesMethod = ReflectionHelper.GetInstanceMethod(Type, "ThrowExceededAllowedReadLineBytes");
 
-        if (MajorVersion <= 7)
-        {
-            ParseStatusLineMethod = ReflectionHelper.GetStaticMethod(Type, "ParseStatusLine");
-            ParseHeaderNameValueMethod = ReflectionHelper.GetStaticMethod(Type, "ParseHeaderNameValue");
-            IsLineEmptyMethod = ReflectionHelper.GetStaticMethod(Type, "IsLineEmpty");
-            ReadNextResponseHeaderLineAsyncMethod = ReflectionHelper.GetInstanceMethod(Type, "ReadNextResponseHeaderLineAsync");
-        }
-        else
-        {
-            ParseStatusLineMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseStatusLine");
-            ParseHeadersMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseHeaders");
-            FillForHeadersAsyncMethod = ReflectionHelper.GetInstanceMethod(Type, "FillForHeadersAsync");
-            ReadBufferField = ReflectionHelper.GetInstanceField(Type, "_readBuffer");
-        }
+        ParseStatusLineMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseStatusLine");
+        ParseHeadersMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseHeaders");
+        FillForHeadersAsyncMethod = ReflectionHelper.GetInstanceMethod(Type, "FillForHeadersAsync");
+        ReadBufferField = ReflectionHelper.GetInstanceField(Type, "_readBuffer");
 
         ChunkedEncodingReadStreamType = Type.Assembly.GetType("System.Net.Http.HttpConnection+ChunkedEncodingReadStream", throwOnError: true)!;
         ContentLengthReadStreamType = Type.Assembly.GetType("System.Net.Http.HttpConnection+ContentLengthReadStream", throwOnError: true)!;
@@ -54,8 +41,6 @@ public class HttpConnectionWrapper
     {
         Inner = MajorVersion switch
         {
-            6 => Activator.CreateInstance(Type, [pool.Inner, null, stream, null])!,
-            7 => Activator.CreateInstance(Type, [pool.Inner, stream, null])!,
             8 => Activator.CreateInstance(Type, [pool.Inner, stream, null, null])!,
             _ => Activator.CreateInstance(Type, [pool.Inner, stream, null, null, null])!,
         };

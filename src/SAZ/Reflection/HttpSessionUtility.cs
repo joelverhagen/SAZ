@@ -8,18 +8,10 @@ public static class HttpSessionUtility
     {
         var assembly = typeof(HttpClient).Assembly;
         MajorVersion = ReflectionHelper.GetAssemblyMajorVersion(typeof(HttpClient));
-        if (MajorVersion < 6)
-        {
-            throw new NotSupportedException($"Unsupported .NET version: {MajorVersion}. Only .NET 6 and later are supported.");
-        }
 
         var httpConnectionSettings = new HttpConnectionSettingsWrapper();
-
-        if (MajorVersion >= 8)
-        {
-            var metrics = new SocketsHttpHandlerMetricsWrapper(new Meter("FakeMetric"));
-            httpConnectionSettings.SetMetrics(metrics);
-        }
+        var metrics = new SocketsHttpHandlerMetricsWrapper(new Meter("FakeMetric"));
+        httpConnectionSettings.SetMetrics(metrics);
 
         var httpConnectionPoolManager = new HttpConnectionPoolManagerWrapper(httpConnectionSettings);
         var httpConnectionKind = HttpConnectionKindWrapper.Http;
