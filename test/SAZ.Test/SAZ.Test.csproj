@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<RootNamespace>Knapcode.SAZ</RootNamespace>
-		<AssemblyName>Knapcode.SAZ</AssemblyName>
+		<AssemblyName>Knapcode.SAZ.Test</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\SAZ.csproj" />
+		<ProjectReference Include="..\..\src\SAZ\SAZ.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
