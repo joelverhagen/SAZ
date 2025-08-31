@@ -1,0 +1,30 @@
+﻿{
+  Method: POST,
+  Uri: https://httpbin.org/post,
+  Headers: {
+    Accept: text/html,application/xhtml+xml,application/xml; q=0.9,image/avif,image/webp,image/apng,*/*; q=0.8,application/signed-exchange; v=b3; q=0.7,
+    Accept-Encoding: gzip,deflate,br,zstd,
+    Accept-Language: en-US,en; q=0.9,
+    Cache-Control: max-age=0,
+    Connection: keep-alive,
+    Host: httpbin.org,
+    Origin: https://httpbin.org,
+    Referer: https://httpbin.org/forms/post,
+    sec-ch-ua: "Not;A=Brand";v="99", "Microsoft Edge";v="139", "Chromium";v="139",
+    sec-ch-ua-mobile: ?0,
+    sec-ch-ua-platform: "Windows",
+    Sec-Fetch-Dest: document,
+    Sec-Fetch-Mode: navigate,
+    Sec-Fetch-Site: same-origin,
+    Sec-Fetch-User: ?1,
+    Upgrade-Insecure-Requests: 1,
+    User-Agent: Mozilla/5.0,(Windows NT 10.0; Win64; x64),AppleWebKit/537.36,(KHTML, like Gecko),Chrome/139.0.0.0,Safari/537.36,Edg/139.0.0.0
+  },
+  Content: {
+    Headers: {
+      Content-Length: 75,
+      Content-Type: application/x-www-form-urlencoded
+    },
+    Value: custname=&custtel=&custemail=&size=medium&topping=bacon&delivery=&comments=
+  }
+}

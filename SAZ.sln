@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAZ", "src\SAZ\SAZ.csproj", "{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{33887017-FCDA-4CD6-8567-937757081752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAZ.Test", "test\SAZ.Test\SAZ.Test.csproj", "{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BDCD0509-5EC7-5D2E-6FFF-C00CEBBE5F70} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{30ADA29B-B5F6-4DDD-96C2-79114A57C1EE} = {33887017-FCDA-4CD6-8567-937757081752}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8F870A4-E3FF-4BF6-980C-62BE44CBDF0C}
+	EndGlobalSection
+EndGlobal

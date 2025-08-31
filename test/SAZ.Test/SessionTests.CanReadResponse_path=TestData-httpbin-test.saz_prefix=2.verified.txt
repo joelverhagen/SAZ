@@ -1,0 +1,23 @@
+﻿{
+  Status: 200 OK,
+  Headers: {
+    Access-Control-Allow-Credentials: true,
+    Access-Control-Allow-Origin: *,
+    Connection: keep-alive,
+    Date: 2025-08-30 14:34:24 Local,
+    Server: gunicorn/19.9.0,
+    Transfer-Encoding: chunked
+  },
+  Content: {
+    Headers: {
+      Content-Type: application/json
+    },
+    Value:
+{"url": "https://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-68b34430-6ab43b311777aae172a19cfa", "Sec-Ch-Ua-Platform": "\"Windows\"", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0", "Accept": "application/json", "Sec-Ch-Ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "Sec-Ch-Ua-Mobile": "?0", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://httpbin.org/", "Accept-Encoding": "gzip, deflate, br, zstd", "Accept-Language": "en-US,en;q=0.9"}, "origin": "23.234.81.154", "id": 0}
+{"url": "https://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-68b34430-6ab43b311777aae172a19cfa", "Sec-Ch-Ua-Platform": "\"Windows\"", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0", "Accept": "application/json", "Sec-Ch-Ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "Sec-Ch-Ua-Mobile": "?0", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://httpbin.org/", "Accept-Encoding": "gzip, deflate, br, zstd", "Accept-Language": "en-US,en;q=0.9"}, "origin": "23.234.81.154", "id": 1}
+{"url": "https://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-68b34430-6ab43b311777aae172a19cfa", "Sec-Ch-Ua-Platform": "\"Windows\"", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0", "Accept": "application/json", "Sec-Ch-Ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "Sec-Ch-Ua-Mobile": "?0", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://httpbin.org/", "Accept-Encoding": "gzip, deflate, br, zstd", "Accept-Language": "en-US,en;q=0.9"}, "origin": "23.234.81.154", "id": 2}
+{"url": "https://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-68b34430-6ab43b311777aae172a19cfa", "Sec-Ch-Ua-Platform": "\"Windows\"", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0", "Accept": "application/json", "Sec-Ch-Ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "Sec-Ch-Ua-Mobile": "?0", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://httpbin.org/", "Accept-Encoding": "gzip, deflate, br, zstd", "Accept-Language": "en-US,en;q=0.9"}, "origin": "23.234.81.154", "id": 3}
+{"url": "https://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-68b34430-6ab43b311777aae172a19cfa", "Sec-Ch-Ua-Platform": "\"Windows\"", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0", "Accept": "application/json", "Sec-Ch-Ua": "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"", "Sec-Ch-Ua-Mobile": "?0", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://httpbin.org/", "Accept-Encoding": "gzip, deflate, br, zstd", "Accept-Language": "en-US,en;q=0.9"}, "origin": "23.234.81.154", "id": 4}
+
+  }
+}

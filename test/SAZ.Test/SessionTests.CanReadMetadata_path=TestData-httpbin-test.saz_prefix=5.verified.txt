@@ -1,0 +1,40 @@
+﻿{
+  SID: 83,
+  BitFlags: 25,
+  SessionTimers: {
+    ClientConnected: 2025-08-30 11:34:57.7493795 -7,
+    ClientBeginRequest: 2025-08-30 11:34:57.9995038 -7,
+    GotRequestHeaders: 2025-08-30 11:34:57.9995038 -7,
+    ClientDoneRequest: 2025-08-30 11:34:57.9995038 -7,
+    GatewayTime: 00:00:00,
+    DNSTime: 00:00:00,
+    TCPConnectTime: 00:00:00,
+    HTTPSHandshakeTime: 00:00:00,
+    ServerConnected: 2025-08-30 11:34:57.8733219 -7,
+    FiddlerBeginRequest: 2025-08-30 11:34:57.9995038 -7,
+    ServerGotRequest: 2025-08-30 11:34:57.9995038 -7,
+    ServerBeginResponse: 2025-08-30 11:34:58.1256105 -7,
+    GotResponseHeaders: 2025-08-30 11:34:58.1256105 -7,
+    ServerDoneResponse: 2025-08-30 11:34:58.1256105 -7,
+    ClientBeginResponse: 2025-08-30 11:34:58.1256105 -7,
+    ClientDoneResponse: 2025-08-30 11:34:58.1256105 -7
+  },
+  PipeInfo: {
+    CltReuse: true,
+    Reused: true
+  },
+  SessionFlags: {
+    Flags: {
+      https-client-version: Tls12,
+      x-clientip: 127.0.0.1,
+      x-clientport: 55709,
+      x-egressport: 55710,
+      x-hostip: 44.195.242.49,
+      x-processinfo: msedge:12140,
+      x-responsebodytransferlength: 469,
+      x-serversocket: REUSE ServerPipe#82,
+      x-supported-client-alpn: h2, http/1.1,
+      x-supported-client-tls-protocols: 15360
+    }
+  }
+}

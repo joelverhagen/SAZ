@@ -1,0 +1,35 @@
+﻿{
+  Status: 200 OK,
+  Headers: {
+    Access-Control-Allow-Credentials: true,
+    Access-Control-Allow-Origin: *,
+    Connection: keep-alive,
+    Date: 2025-08-30 14:33:36 Local,
+    Server: gunicorn/19.9.0
+  },
+  Content: {
+    Headers: {
+      Content-Length: 789,
+      Content-Type: application/json
+    },
+    Value: {
+      headers: {
+        Accept: application/json,
+        Accept-Encoding: gzip, deflate, br, zstd,
+        Accept-Language: en-US,en;q=0.9,
+        Host: httpbin.org,
+        Referer: https://httpbin.org/,
+        Sec-Ch-Ua: "Not;A=Brand";v="99", "Microsoft Edge";v="139", "Chromium";v="139",
+        Sec-Ch-Ua-Mobile: ?0,
+        Sec-Ch-Ua-Platform: "Windows",
+        Sec-Fetch-Dest: empty,
+        Sec-Fetch-Mode: cors,
+        Sec-Fetch-Site: same-origin,
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0,
+        X-Amzn-Trace-Id: Root=1-68b343ff-323c4f5b0d90d8975e1ce122
+      },
+      origin: 23.234.81.154,
+      url: https://httpbin.org/get
+    }
+  }
+}
