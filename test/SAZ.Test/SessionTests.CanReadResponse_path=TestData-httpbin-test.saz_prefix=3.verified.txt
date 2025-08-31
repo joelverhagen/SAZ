@@ -4,7 +4,6 @@
     Access-Control-Allow-Credentials: true,
     Access-Control-Allow-Origin: *,
     Connection: keep-alive,
-    Date: 2025-08-30 14:34:42 Local,
     Server: gunicorn/19.9.0
   },
   Content: {

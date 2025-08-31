@@ -115,6 +115,10 @@ public class HttpConnectionWrapper
         {
             response.Content = HttpSessionUtility.DecompressContent(content);
         }
+        else
+        {
+            response.Content = content;
+        }
 
         return response;
     }

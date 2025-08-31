@@ -4,7 +4,6 @@
     Access-Control-Allow-Credentials: true,
     Access-Control-Allow-Origin: https://httpbin.org,
     Connection: keep-alive,
-    Date: 2025-08-30 14:35:07 Local,
     Server: gunicorn/19.9.0
   },
   Content: {

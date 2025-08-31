@@ -41,14 +41,20 @@ public class SessionTests
 
         var response = await session.ReadResponseAsync(decompress: true, CancellationToken.None);
 
+        // clear the date because it gets formatted to local time by Verify.Http
+        // https://github.com/VerifyTests/Verify.Http/blob/60264ac7819e03707736f0ddaa9f45d30734c8e4/src/Verify.Http/Extensions.cs#L22
+        Assert.NotNull(response.Headers.Date);
+        response.Headers.Date = null;
+
         await VerifyAsync(response, path, prefix);
     }
 
     private async Task VerifyAsync<T>(T obj, string path, string prefix)
     {
         Assert.NotNull(obj);
+
 #if VERIFY
-        await Verify(obj).UseParameters(path, prefix).DontScrubDateTimes();
+        await Verify(obj).UseParameters(path, prefix);
 #else
         await Task.Yield();
 #endif

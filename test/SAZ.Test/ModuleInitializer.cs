@@ -10,6 +10,7 @@ public static class ModuleInitializer
 #if VERIFY
         VerifyDiffPlex.Initialize();
         VerifierSettings.InitializePlugins();
+        VerifierSettings.DontScrubDateTimes();
         VerifierSettings.AutoVerify(includeBuildServer: false);
         EmptyFiles.FileExtensions.AddTextExtension("x-www-form-urlencoded");
 #endif
