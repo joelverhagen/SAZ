@@ -246,14 +246,14 @@ public class HttpConnectionWrapper
 
         var version = Encoding.UTF8.GetString(span.Slice(endOfRequestUri + 1));
         const string versionPrefix = "HTTP/";
-        if (!version.StartsWith(version, StringComparison.OrdinalIgnoreCase))
+        if (!version.StartsWith(versionPrefix, StringComparison.OrdinalIgnoreCase))
         {
-            throw new InvalidDataException($"Invalid HTTP version was found on the first line. First line: {requestLine}");
+            throw new InvalidDataException($"Invalid HTTP version prefix on first line. First line: {requestLine}");
         }
 
         if (!Version.TryParse(version.AsSpan(versionPrefix.Length), out var parsedVersion))
         {
-            throw new InvalidDataException($"Unable to parse HTTP version was found on the first line. First line: {requestLine}");
+            throw new InvalidDataException($"Unable to parse HTTP version on first line. First line: {requestLine}");
         }
 
         request.Version = parsedVersion;

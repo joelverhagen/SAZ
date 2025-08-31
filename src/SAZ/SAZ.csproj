@@ -16,7 +16,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageProjectUrl>https://github.com/joelverhagen/SAZ</PackageProjectUrl>
     	<PackageReadmeFile>README.md</PackageReadmeFile>
-    	<Description>Process Symbol Archive Zip (SAZ) file format produced by Fiddler.</Description>
+		<Description>Parse and enumerate the Session Archive Zip (SAZ) file format produced by Fiddler.</Description>
     	<PackageTags>saz session archive zip http format fiddler</PackageTags>
 	</PropertyGroup>
 

@@ -19,7 +19,7 @@ public class ArrayBufferWrapper
         DiscardMethod = ReflectionHelper.GetInstanceMethod(Type, "Discard");
     }
 
-    public object Inner;
+    public object Inner { get; }
 
     public ArrayBufferWrapper(object inner)
     {
@@ -28,7 +28,7 @@ public class ArrayBufferWrapper
             throw new ArgumentException($"Expected type '{Type.FullName}', but got '{inner.GetType().FullName}'.", nameof(inner));
         }
 
-        Inner = inner;
+    Inner = inner;
     }
 
     public void Discard(int bytes)
