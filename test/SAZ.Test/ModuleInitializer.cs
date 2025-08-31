@@ -8,6 +8,7 @@ public static class ModuleInitializer
     public static void Initialize()
     {
 #if VERIFY
+        VerifyDiffPlex.Initialize();
         VerifierSettings.InitializePlugins();
         VerifierSettings.AutoVerify(includeBuildServer: false);
         EmptyFiles.FileExtensions.AddTextExtension("x-www-form-urlencoded");

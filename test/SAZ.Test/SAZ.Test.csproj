@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(HasVerify)' == 'true'">
+		<PackageReference Include="Verify.DiffPlex" />
 		<PackageReference Include="Verify.Http" />
 		<PackageReference Include="Verify.Xunit" />
 	</ItemGroup>
