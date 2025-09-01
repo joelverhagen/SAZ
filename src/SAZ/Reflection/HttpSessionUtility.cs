@@ -9,14 +9,19 @@ public static class HttpSessionUtility
         var assembly = typeof(HttpClient).Assembly;
         MajorVersion = ReflectionHelper.GetAssemblyMajorVersion(typeof(HttpClient));
 
-        var httpConnectionSettings = new HttpConnectionSettingsWrapper();
-        var metrics = new SocketsHttpHandlerMetricsWrapper(new Meter("FakeMetric"));
-        httpConnectionSettings.SetMetrics(metrics);
+        HttpConnectionSettings = new HttpConnectionSettingsWrapper();
+        SocketsHttpHandlerMetricsWrapper = new SocketsHttpHandlerMetricsWrapper(new Meter("FakeMetric"));
+        HttpConnectionSettings.SetMetrics(SocketsHttpHandlerMetricsWrapper);
 
-        var httpConnectionPoolManager = new HttpConnectionPoolManagerWrapper(httpConnectionSettings);
-        var httpConnectionKind = HttpConnectionKindWrapper.Http;
+        // Disable asynchronous draining on dispose.
+        // This prevents streams owned by the HttpConnection from being disposed at some non-determistic time (typically handled by the connection pool).
+        HttpConnectionSettings.SetMaxResponseDrainSize(-1);
+        HttpConnectionSettings.SetMaxResponseDrainTime(TimeSpan.FromSeconds(-1));
 
-        HttpConnectionPool = new HttpConnectionPoolWrapper(httpConnectionPoolManager, httpConnectionKind, "localhost", 80);
+        HttpConnectionPoolManager = new HttpConnectionPoolManagerWrapper(HttpConnectionSettings);
+        HttpConnectionKind = HttpConnectionKindWrapper.Http;
+
+        HttpConnectionPool = new HttpConnectionPoolWrapper(HttpConnectionPoolManager, HttpConnectionKind, "localhost", 80);
 
         GZipDecompressedContentType = assembly.GetType("System.Net.Http.DecompressionHandler+GZipDecompressedContent", throwOnError: true)!;
         DeflateDecompressedContent = assembly.GetType("System.Net.Http.DecompressionHandler+DeflateDecompressedContent", throwOnError: true)!;
@@ -75,11 +80,14 @@ public static class HttpSessionUtility
     }
 
     private static readonly int MajorVersion;
+    private static readonly HttpConnectionSettingsWrapper HttpConnectionSettings;
+    private static readonly SocketsHttpHandlerMetricsWrapper SocketsHttpHandlerMetricsWrapper;
     private static readonly HttpConnectionPoolWrapper HttpConnectionPool;
     private static readonly Type GZipDecompressedContentType;
     private static readonly Type DeflateDecompressedContent;
     private static readonly Type BrotliDecompressedContent;
-
+    private static readonly HttpConnectionPoolManagerWrapper HttpConnectionPoolManager;
+    private static readonly HttpConnectionKindWrapper HttpConnectionKind;
     private const int MaxResponseHeadersByteLength = 65536; // 64 KB, the default in HttpHandlerDefaults
 
     private static HttpConnectionWrapper CreateHttpConnection(Stream stream)

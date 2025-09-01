@@ -7,7 +7,7 @@ public static class ModuleInitializer
     [ModuleInitializer]
     public static void Initialize()
     {
-#if VERIFY
+#if !NET8_0
         VerifyDiffPlex.Initialize();
         VerifierSettings.InitializePlugins();
         VerifierSettings.DontScrubDateTimes();

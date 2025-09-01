@@ -2,6 +2,42 @@
 
 public class SessionTests
 {
+    [Fact]
+    public async Task StressTest()
+    {
+        const int Iterations = 100;
+        for (var i = 0; i < Iterations; i++)
+        {
+            for (var read = 0; read < 50; read++)
+            {
+                var cancellationToken = CancellationToken.None;
+                var path = "TestData/images.saz";
+                using var zipStream = File.OpenRead(path);
+                using var saz = SessionArchiveZip.Create(zipStream);
+                var buffer = new byte[read];
+
+                foreach (var session in saz.Sessions)
+                {
+                    var metadata = await session.ReadMetadataAsync(cancellationToken);
+
+                    using var request = await session.ReadRequestAsync(decompress: false, cancellationToken);
+                    if (read > 0)
+                    {
+                        using var requestStream = await request.Content!.ReadAsStreamAsync(cancellationToken);
+                        var bytesRead = await requestStream.ReadAsync(buffer, 0, read, cancellationToken);
+                    }
+
+                    using var response = await session.ReadResponseAsync(decompress: false, cancellationToken);
+                    if (read > 0)
+                    {
+                        using var responseStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+                        var bytesRead = await responseStream.ReadAsync(buffer, 0, read, cancellationToken);
+                    }
+                }
+            }
+        }
+    }
+
     [Theory]
     [MemberData(nameof(SessionPrefixes))]
     public async Task CanReadMetadata(string path, string prefix)
@@ -53,7 +89,7 @@ public class SessionTests
     {
         Assert.NotNull(obj);
 
-#if VERIFY
+#if !NET8_0
         await Verify(obj).UseParameters(path, prefix);
 #else
         await Task.Yield();
