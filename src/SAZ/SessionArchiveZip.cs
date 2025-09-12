@@ -16,6 +16,11 @@ public class SessionArchiveZip : IDisposable
 
     public static SessionArchiveZip Create(Stream zipStream)
     {
+        return Create(zipStream, null);
+    }
+
+    public static SessionArchiveZip Create(Stream zipStream, SemaphoreSlim? readLock)
+    {
         var zipReader = new ZipArchive(zipStream, ZipArchiveMode.Read);
         var filePrefixToSession = new Dictionary<string, Session>();
         var sessions = new List<Session>();
@@ -27,17 +32,17 @@ public class SessionArchiveZip : IDisposable
                 continue;
             }
 
-            if (TryApply(filePrefixToSession, sessions, entry, "_c.txt", (s, e) => s.RequestEntry = entry))
+            if (TryApply(filePrefixToSession, sessions, readLock, entry, "_c.txt", (s, e) => s.RequestEntry = entry))
             {
                 continue;
             }
 
-            if (TryApply(filePrefixToSession, sessions, entry, "_s.txt", (s, e) => s.ResponseEntry = entry))
+            if (TryApply(filePrefixToSession, sessions, readLock, entry, "_s.txt", (s, e) => s.ResponseEntry = entry))
             {
                 continue;
             }
 
-            if (TryApply(filePrefixToSession, sessions, entry, "_m.xml", (s, e) => s.MetadataEntry = entry))
+            if (TryApply(filePrefixToSession, sessions, readLock, entry, "_m.xml", (s, e) => s.MetadataEntry = entry))
             {
                 continue;
             }
@@ -51,6 +56,7 @@ public class SessionArchiveZip : IDisposable
     private static bool TryApply(
         Dictionary<string, Session> filePrefixToSession,
         List<Session> sessions,
+        SemaphoreSlim? readLock,
         ZipArchiveEntry entry,
         string suffix,
         Action<Session, ZipArchiveEntry> apply)
@@ -63,7 +69,7 @@ public class SessionArchiveZip : IDisposable
         var prefix = entry.FullName.Substring(SessionFilePrefix.Length, entry.FullName.Length - (suffix.Length + SessionFilePrefix.Length));
         if (!filePrefixToSession.TryGetValue(prefix, out var session))
         {
-            session = new Session(prefix);
+            session = new Session(prefix, readLock);
             sessions.Add(session);
             filePrefixToSession.Add(prefix, session);
         }
