@@ -47,6 +47,16 @@ public class SessionArchiveZip : IDisposable
                 continue;
             }
 
+            if (TryApply(filePrefixToSession, sessions, readLock, entry, "_w.txt", (s, e) => s.WebSocketEntry = entry))
+            {
+                continue;
+            }
+
+            if (TryApply(filePrefixToSession, sessions, readLock, entry, "_g.txt", (s, e) => s.GrpcEntry = entry))
+            {
+                continue;
+            }
+
             throw new InvalidDataException($"Unsupported file found in archive {SessionFilePrefix} directory: {entry.FullName}");
         }
 

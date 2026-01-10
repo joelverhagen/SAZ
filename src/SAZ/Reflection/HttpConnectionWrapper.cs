@@ -77,9 +77,10 @@ public class HttpConnectionWrapper
             cancellationToken.ThrowIfCancellationRequested();
         }
 
-        if (response.StatusCode < HttpStatusCode.OK)
+        if (response.StatusCode < HttpStatusCode.OK
+            && response.StatusCode != HttpStatusCode.SwitchingProtocols)
         {
-            throw new NotImplementedException("Informational responses are not supported.");
+            throw new NotImplementedException("Some informational responses (HTTP 1XX) are not supported.");
         }
 
         while (!ParseHeaders(response))

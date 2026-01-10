@@ -19,6 +19,8 @@ public class Session
     public ZipArchiveEntry? MetadataEntry { get; internal set; }
     public ZipArchiveEntry? RequestEntry { get; internal set; }
     public ZipArchiveEntry? ResponseEntry { get; internal set; }
+    public ZipArchiveEntry? WebSocketEntry { get; internal set; }
+    public ZipArchiveEntry? GrpcEntry { get; internal set; }
 
     public async Task<SessionMetadata> ReadMetadataAsync(CancellationToken cancellationToken)
     {
