@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Knapcode.SAZ;
@@ -13,6 +14,19 @@ public class SessionMetadata
     public PipeInfo? PipeInfo { get; set; }
     public TunnelInfo? TunnelInfo { get; set; }
     public SessionFlags? SessionFlags { get; set; }
+
+    public static async Task<SessionMetadata> FromStreamAsync(Stream stream, CancellationToken cancellationToken)
+    {
+        using var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true, XmlResolver = null });
+        var document = await XDocument.LoadAsync(reader, LoadOptions.None, cancellationToken);
+
+        if (document.Root is null)
+        {
+            throw new InvalidDataException("No root XML element found in the metadata stream.");
+        }
+
+        return FromXElement(document.Root!);
+    }
 
     public static SessionMetadata FromXElement(XElement element)
     {

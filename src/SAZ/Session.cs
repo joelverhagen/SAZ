@@ -30,15 +30,7 @@ public class Session
         }
 
         using var stream = await WrapEntryStreamAsync(MetadataEntry);
-        using var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true, XmlResolver = null });
-        var document = await XDocument.LoadAsync(reader, LoadOptions.None, cancellationToken);
-
-        if (document.Root is null)
-        {
-            throw new InvalidDataException("No root XML element found in the metadata stream.");
-        }
-
-        return SessionMetadata.FromXElement(document.Root!);
+        return await SessionMetadata.FromStreamAsync(stream, cancellationToken);
     }
 
     public async Task<HttpRequestMessage> ReadRequestAsync(bool decompress, CancellationToken cancellationToken)
