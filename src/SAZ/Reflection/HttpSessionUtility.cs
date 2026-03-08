@@ -21,8 +21,6 @@ public static class HttpSessionUtility
         HttpConnectionPoolManager = new HttpConnectionPoolManagerWrapper(HttpConnectionSettings);
         HttpConnectionKind = HttpConnectionKindWrapper.Http;
 
-        HttpConnectionPool = new HttpConnectionPoolWrapper(HttpConnectionPoolManager, HttpConnectionKind, "localhost", 80);
-
         GZipDecompressedContentType = assembly.GetType("System.Net.Http.DecompressionHandler+GZipDecompressedContent", throwOnError: true)!;
         DeflateDecompressedContent = assembly.GetType("System.Net.Http.DecompressionHandler+DeflateDecompressedContent", throwOnError: true)!;
         BrotliDecompressedContent = assembly.GetType("System.Net.Http.DecompressionHandler+BrotliDecompressedContent", throwOnError: true)!;
@@ -53,7 +51,8 @@ public static class HttpSessionUtility
     {
         try
         {
-            var httpConnection = CreateHttpConnection(stream);
+            using var httpConnectionPool = CreateHttpConnectionPool();
+            var httpConnection = CreateHttpConnection(httpConnectionPool, stream);
             var response = await httpConnection.ParseResponseAsync(decompress, cancellationToken);
             return response;
         }
@@ -68,7 +67,8 @@ public static class HttpSessionUtility
     {
         try
         {
-            var httpConnection = CreateHttpConnection(stream);
+            using var httpConnectionPool = CreateHttpConnectionPool();
+            var httpConnection = CreateHttpConnection(httpConnectionPool, stream);
             var request = await httpConnection.ParseRequestAsync(decompress, cancellationToken);
             return request;
         }
@@ -82,7 +82,6 @@ public static class HttpSessionUtility
     private static readonly int MajorVersion;
     private static readonly HttpConnectionSettingsWrapper HttpConnectionSettings;
     private static readonly SocketsHttpHandlerMetricsWrapper SocketsHttpHandlerMetricsWrapper;
-    private static readonly HttpConnectionPoolWrapper HttpConnectionPool;
     private static readonly Type GZipDecompressedContentType;
     private static readonly Type DeflateDecompressedContent;
     private static readonly Type BrotliDecompressedContent;
@@ -90,9 +89,14 @@ public static class HttpSessionUtility
     private static readonly HttpConnectionKindWrapper HttpConnectionKind;
     private const int MaxResponseHeadersByteLength = 65536; // 64 KB, the default in HttpHandlerDefaults
 
-    private static HttpConnectionWrapper CreateHttpConnection(Stream stream)
+    private static HttpConnectionPoolWrapper CreateHttpConnectionPool()
     {
-        var httpConnection = new HttpConnectionWrapper(HttpConnectionPool, stream);
+        return new HttpConnectionPoolWrapper(HttpConnectionPoolManager, HttpConnectionKind, "localhost", 80);
+    }
+
+    private static HttpConnectionWrapper CreateHttpConnection(HttpConnectionPoolWrapper httpConnectionPool, Stream stream)
+    {
+        var httpConnection = new HttpConnectionWrapper(httpConnectionPool, stream);
         httpConnection.AllowedReadLineBytes = MaxResponseHeadersByteLength;
         return httpConnection;
     }

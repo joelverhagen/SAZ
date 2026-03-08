@@ -47,9 +47,11 @@ public class ReflectionHelper
         return method;
     }
 
-    public static MethodInfo GetInstanceMethod(Type type, string methodName)
+    public static MethodInfo GetInstanceMethod(Type type, string methodName, Type[]? types = null)
     {
-        var method = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        var method = types is null
+            ? type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            : type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, types);
         if (method is null)
         {
             throw new InvalidOperationException($"Unable to find instance method '{methodName}' on type '{type.FullName}'.");

@@ -4,12 +4,14 @@ using System.Text;
 
 namespace System.Net.Http;
 
-public class HttpConnectionWrapper
+public class HttpConnectionWrapper : IDisposable
 {
     private static readonly Type Type;
     private static readonly int MajorVersion;
     private static readonly FieldInfo AllowedReadLineBytesField;
     private static readonly MethodInfo ThrowExceededAllowedReadLineBytesMethod;
+    private static readonly MethodInfo DisposeMethod;
+
     private static readonly MethodInfo ParseStatusLineMethod;
     private static readonly MethodInfo? ParseHeadersMethod;
     private static readonly MethodInfo? FillForHeadersAsyncMethod;
@@ -24,6 +26,7 @@ public class HttpConnectionWrapper
         MajorVersion = ReflectionHelper.GetAssemblyMajorVersion(Type);
         AllowedReadLineBytesField = ReflectionHelper.GetInstanceField(Type, "_allowedReadLineBytes");
         ThrowExceededAllowedReadLineBytesMethod = ReflectionHelper.GetInstanceMethod(Type, "ThrowExceededAllowedReadLineBytes");
+        DisposeMethod = ReflectionHelper.GetInstanceMethod(Type, "Dispose", []);
 
         ParseStatusLineMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseStatusLine");
         ParseHeadersMethod = ReflectionHelper.GetInstanceMethod(Type, "ParseHeaders");
@@ -50,6 +53,11 @@ public class HttpConnectionWrapper
     {
         ReflectionHelper.ThrowIfMismatchType(Type, inner);
         Inner = inner;
+    }
+
+    public void Dispose()
+    {
+        DisposeMethod.Invoke(Inner, null);
     }
 
     public int AllowedReadLineBytes
